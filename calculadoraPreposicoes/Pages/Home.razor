@@ -1,0 +1,80 @@
+﻿@page "/"
+
+<PageTitle>Calculadora</PageTitle>
+
+<MudGrid Spacing="2" Class="mt-4">
+    <!-- Linha de botões (caracteres A, B, C, etc.) -->
+    <MudItem xs="12">
+        <MudGrid Spacing="1" Justify="Justify.Center">
+            @foreach (var caractere in new[] { "A", "B", "C", "D", "E", "(", ")", "~", "∧", "∨", "→", "↔", "⊻" })
+            {
+                <MudItem xs="6" sm="1">
+                    <MudButton OnClick="() => adicionarCaractere(caractere)"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               FullWidth="true">
+                        @caractere
+                    </MudButton>
+                </MudItem>
+            }
+        </MudGrid>
+    </MudItem>
+
+    <!-- Campo de texto para a expressão -->
+    <MudItem xs="12" sm="12">
+        <MudTextField @bind-Value="expressao.expressao"
+                      Label="Expressão"
+                      Variant="Variant.Outlined"
+                      FullWidth="true"
+                      ReadOnly="true"
+                      Class="mt-4" />
+    </MudItem>
+
+
+    <MudGrid Class="mt-4" Spacing="1" Justify="Justify.Center">
+        <!-- Botão para apagar o último caractere -->
+        <MudItem xs="12" sm="2">
+            <MudButton OnClick="apagarCaractere"
+                       Variant="Variant.Filled"
+                       Color="Color.Error"
+                       FullWidth="true">
+                Apagar
+            </MudButton>
+        </MudItem>
+
+        <!-- Botão de calcular -->
+        <MudItem xs="12" sm="2">
+            <MudButton OnClick="calcularTabelaVerdade"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       FullWidth="true">
+                Calcular
+            </MudButton>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Exibição da tabela verdade -->
+    @if (tabelaVerdade?.Count > 0)
+    {
+@*         <MudTable Items="colunasTabela" Class="mt-4">
+            <RowTemplate>
+                @foreach (var coluna in context)
+                {
+                    <MudTh>@coluna</MudTh>
+                }
+            </RowTemplate>
+        </MudTable> *@
+
+        <MudTable Items="tabelaVerdade" Class="mt-4">
+
+            <RowTemplate>
+                @foreach (var valor in context)
+                {
+                    <MudTd>@valor</MudTd>
+                }
+            </RowTemplate>
+        </MudTable>
+
+    }
+
+</MudGrid>
