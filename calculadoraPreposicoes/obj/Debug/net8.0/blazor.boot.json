@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "calculadoraPreposicoes",
   "resources": {
-    "hash": "sha256-quN3nk315k0TnwLZpSqKkywiN8UIfzzVxK/wsIAwofc=",
+    "hash": "sha256-QZkyEbA4IomX1pYkqzJ4i5Fmsxpx74ENE8PywmkMKP4=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-xNQsYHtL1vcbrVTHDZAwJM4WovpoyjsrM2C6FQ8cW1w="
     },
@@ -213,10 +213,10 @@
       "mscorlib.wasm": "sha256-RAf5jgXLg+06C4tJ3CabxAZaVjCN2/+E6fxRjRN8yHk=",
       "netstandard.wasm": "sha256-KCAE8RQwTurP5pGnGF819qf9sK++2O0rXzt6tOjlfi8=",
       "System.Private.CoreLib.wasm": "sha256-LQqLbHgeEX4HONx7GwIxGgmzIXP6n2OPxqnq+/4Tyqk=",
-      "calculadoraPreposicoes.wasm": "sha256-Xd8gmQxJ7Km0TqlWKdd2CBVN1wUubyq6CmqRlo/ljlU="
+      "calculadoraPreposicoes.wasm": "sha256-4BWrvdcj7IYzmpk/JcT3u8R3MBXQQLknk7vYwikT2nU="
     },
     "pdb": {
-      "calculadoraPreposicoes.pdb": "sha256-L8iuZTpKwwXGfPeJbk3yA58/gWAaoo8NRrWzqqHO8Rc="
+      "calculadoraPreposicoes.pdb": "sha256-IVIw3XHZYcixjhS6YLy3zXp8lC9PTVBND3TZmDMNOvQ="
     }
   },
   "cacheBootResources": true,

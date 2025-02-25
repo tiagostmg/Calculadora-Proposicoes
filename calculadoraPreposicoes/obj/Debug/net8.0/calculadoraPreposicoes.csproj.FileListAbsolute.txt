@@ -1054,6 +1054,6 @@ C:\Users\IgorPracianoThomaz\source\repos\calculadoraPreposicoes\calculadoraPrepo
 C:\Users\IgorPracianoThomaz\source\repos\calculadoraPreposicoes\calculadoraPreposicoes\obj\Debug\net8.0\refint\calculadoraPreposicoes.dll
 C:\Users\IgorPracianoThomaz\source\repos\calculadoraPreposicoes\calculadoraPreposicoes\obj\Debug\net8.0\calculadoraPreposicoes.pdb
 C:\Users\IgorPracianoThomaz\source\repos\calculadoraPreposicoes\calculadoraPreposicoes\obj\Debug\net8.0\ref\calculadoraPreposicoes.dll
-C:\Users\IgorPracianoThomaz\source\repos\calculadoraPreposicoes\calculadoraPreposicoes\obj\Debug\net8.0\compressed\d53zjaqi58-3gu6hkgrgo.gz
-C:\Users\IgorPracianoThomaz\source\repos\calculadoraPreposicoes\calculadoraPreposicoes\obj\Debug\net8.0\compressed\jye2u4yvc7-txx0gbbbv0.gz
-C:\Users\IgorPracianoThomaz\source\repos\calculadoraPreposicoes\calculadoraPreposicoes\obj\Debug\net8.0\compressed\lml3yya21g-pk6emfg86u.gz
+C:\Users\IgorPracianoThomaz\source\repos\calculadoraPreposicoes\calculadoraPreposicoes\obj\Debug\net8.0\compressed\d53zjaqi58-4n22kuphzz.gz
+C:\Users\IgorPracianoThomaz\source\repos\calculadoraPreposicoes\calculadoraPreposicoes\obj\Debug\net8.0\compressed\jye2u4yvc7-7yh8lf5ehj.gz
+C:\Users\IgorPracianoThomaz\source\repos\calculadoraPreposicoes\calculadoraPreposicoes\obj\Debug\net8.0\compressed\lml3yya21g-sj8yemmlsx.gz

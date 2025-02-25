@@ -41,6 +41,7 @@ namespace calculadoraPreposicoes.Pages
             int linhas = (int)Math.Pow(2, proposicoes.Count);
             tabelaVerdade = new List<List<string>>();
 
+
             for (int i = 0; i < linhas; i++)
             {
                 var valores = new Dictionary<string, bool>();
@@ -57,6 +58,8 @@ namespace calculadoraPreposicoes.Pages
                 linha.Add(resultado.ToString());
                 tabelaVerdade.Add(linha);
             }
+
+            tabelaVerdade.Add(colunasTabela);
 
             cont = colunasTabela.Count;
             tabelaVerdade.Reverse(); // Apenas inverte as linhas, mantendo a ordem das colunas correta
