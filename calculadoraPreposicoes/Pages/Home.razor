@@ -21,7 +21,7 @@
     </MudItem>
 
     <EditForm class="d-flex flex-column align-items-center w-100" EditContext="context" OnValidSubmit="calcularTabelaVerdade">
-
+        <DataAnnotationsValidator></DataAnnotationsValidator>
         <MudGrid Class="d-flex align-items-center w-100">
             <MudItem xs="12" sm="11">
                 <MudTextField @bind-Value="expressao.expressao"
