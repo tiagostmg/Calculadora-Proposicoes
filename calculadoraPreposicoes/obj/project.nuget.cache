@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VnEjxNrEEYs=",
+  "dgSpecHash": "gWA4aWwMuY4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rafael\\Source\\Repos\\rcacau\\Calculadora-Proposicoes\\calculadoraPreposicoes\\calculadoraPreposicoes.csproj",
+  "projectFilePath": "C:\\Users\\Rafael\\source\\repos\\rcacau\\Calculadora-Proposicoes\\calculadoraPreposicoes\\calculadoraPreposicoes.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.13\\microsoft.aspnetcore.authorization.8.0.13.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.13\\microsoft.aspnetcore.components.8.0.13.nupkg.sha512",
@@ -30,8 +30,8 @@
     "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.jsinterop\\8.0.13\\microsoft.jsinterop.8.0.13.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.jsinterop.webassembly\\8.0.13\\microsoft.jsinterop.webassembly.8.0.13.nupkg.sha512",
-    "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.10\\microsoft.net.illink.tasks.8.0.10.nupkg.sha512",
-    "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\8.0.13\\microsoft.net.sdk.webassembly.pack.8.0.13.nupkg.sha512",
+    "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.13\\microsoft.net.illink.tasks.8.0.13.nupkg.sha512",
+    "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.2\\microsoft.net.sdk.webassembly.pack.9.0.2.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\mudblazor\\8.2.0\\mudblazor.8.2.0.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\mudblazor.thememanager\\3.0.0\\mudblazor.thememanager.3.0.0.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512",
