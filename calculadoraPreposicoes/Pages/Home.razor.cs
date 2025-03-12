@@ -1,6 +1,8 @@
 ﻿using calculadoraPreposicoes.VM;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using System.ComponentModel.DataAnnotations;
 
 namespace calculadoraPreposicoes.Pages
 {
@@ -11,6 +13,9 @@ namespace calculadoraPreposicoes.Pages
         private List<string> colunasTabela = new();
         private List<List<string>> tabelaVerdade;
         private int cont;
+
+        [Inject]
+        public ISnackbar SnackBar { get; set; } = default!;
 
         protected override void OnInitialized()
         {
@@ -44,6 +49,14 @@ namespace calculadoraPreposicoes.Pages
         {
             if (context.Validate())
             {
+
+                string validacao = validar();
+                if(validacao != "ok")
+                {
+                    SnackBar.Add(validacao, Severity.Error);
+                    return;
+                }
+
                 // Identifica as proposições únicas
                 var proposicoes = new HashSet<string>();
                 foreach (var c in expressao.expressao)
@@ -181,5 +194,94 @@ namespace calculadoraPreposicoes.Pages
             // Retorna o resultado final
             return expr.Trim() == "true";
         }
+
+
+        private static readonly HashSet<char> caracteresPermitidos = new()
+        {
+            'A', 'B', 'C', 'D', 'E', '(', ')', '~', '∧', '∨', '→', '↔', '⊻'
+        };
+
+        private static readonly HashSet<char> operadores = new()
+        {
+            '~', '∧', '∨', '→', '↔', '⊻'
+        };
+
+        private static readonly HashSet<char> preposicoes = new()
+        {
+            'A', 'B', 'C', 'D', 'E'
+        };
+
+        private string validar()
+        {
+            // Verificar caracteres inválidos
+            if (expressao.expressao.Any(c => !caracteresPermitidos.Contains(c)))
+            {
+                //return new ValidationResult("A expressão contém caracteres inválidos.");
+                return "A expressão contém caracteres inválidos.";
+            }
+
+            // Verificar se os parênteses estão balanceados
+            if (!ParentesesBalanceados(expressao.expressao))
+            {
+                //return new ValidationResult("A expressão possui parênteses desbalanceados.");
+                return "A expressão possui parênteses desbalanceados.";
+            }
+
+            // Verificar se não há preposições juntas sem operador
+            if (TemPreposicoesJuntas(expressao.expressao))
+            {
+                //return new ValidationResult("A expressão contém preposições juntas sem operador.");
+                return "A expressão contém preposições juntas sem operador.";
+            }
+
+            // Verificar se não há operadores juntos sem preposição entre eles
+            if (TemOperadoresJuntos(expressao.expressao))
+            {
+                //return new ValidationResult("A expressão contém operadores juntos sem preposição entre eles.");
+                return "A expressão contém operadores juntos sem preposição entre eles.";
+            }
+
+            //return ValidationResult.Success;
+            return "ok";
+        }
+
+        private static bool ParentesesBalanceados(string expressao)
+        {
+            int contador = 0;
+            foreach (char c in expressao)
+            {
+                if (c == '(') contador++;
+                if (c == ')') contador--;
+
+                if (contador < 0) return false; // Fecha parênteses antes de abrir
+            }
+            return contador == 0;
+        }
+
+        private static bool TemPreposicoesJuntas(string expressao)
+        {
+            for (int i = 0; i < expressao.Length - 1; i++)
+            {
+                if (preposicoes.Contains(expressao[i]) && preposicoes.Contains(expressao[i + 1]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static bool TemOperadoresJuntos(string expressao)
+        {
+            for (int i = 0; i < expressao.Length - 1; i++)
+            {
+                if (operadores.Contains(expressao[i]) && operadores.Contains(expressao[i + 1]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
     }
 }
