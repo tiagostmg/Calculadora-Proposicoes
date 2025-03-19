@@ -13,7 +13,9 @@ namespace calculadoraPreposicoes.Pages
         private List<string> colunasTabela = new();
         private List<List<string>> tabelaVerdade;
         private int cont;
-
+        private bool calculandoTabela = false;
+        private bool temCaractere = true;
+        
         [Inject]
         public ISnackbar SnackBar { get; set; } = default!;
 
@@ -23,10 +25,12 @@ namespace calculadoraPreposicoes.Pages
             expressao = new Expressao();
             context = new EditContext(expressao);
             context.OnValidationRequested += (sender, e) => Console.WriteLine("Validação acionada!");
+            vazio();
         }
         private void adicionarCaractere(string caractere)
         {
             expressao.expressao += caractere;
+            vazio();
         }
 
         private void apagarCaractere()
@@ -35,6 +39,7 @@ namespace calculadoraPreposicoes.Pages
             {
                 expressao.expressao = expressao.expressao.Substring(0, expressao.expressao.Length - 1);
             }
+            vazio();
         }
 
         private void apagar()
@@ -43,10 +48,31 @@ namespace calculadoraPreposicoes.Pages
             {
                 expressao.expressao = "";
             }
+            vazio();
         }
 
-        private void calcularTabelaVerdade()
+        private void vazio()
         {
+            if (!string.IsNullOrEmpty(expressao.expressao) && expressao.expressao.Length > 0)
+            {
+                temCaractere = false;
+            }
+            else
+            {
+                temCaractere = true;
+            }
+        }
+
+        private async Task calcularTabelaVerdade()
+        {
+            if (tabelaVerdade is not null)
+            {
+                tabelaVerdade.Clear();
+            }
+            
+            calculandoTabela = true;
+            
+            await Task.Delay(500);
             if (context.Validate())
             {
 
@@ -54,6 +80,7 @@ namespace calculadoraPreposicoes.Pages
                 if(validacao != "ok")
                 {
                     SnackBar.Add(validacao, Severity.Error);
+                    calculandoTabela = false;
                     return;
                 }
 
@@ -87,8 +114,20 @@ namespace calculadoraPreposicoes.Pages
                     var resultado = AvaliarExpressao(expressao.expressao, valores);
 
                     // Adiciona a linha à tabela
-                    var linha = proposicoesOrdenadas.Select(p => valores[p].ToString()).ToList();
-                    linha.Add(resultado.ToString());
+                    var linha = proposicoesOrdenadas.Select(p => valores[p].ToString() == "True" ? "V" : "F").ToList();
+
+                    var resultadoTabela = "";
+                    
+                    if (resultado)
+                    {
+                        resultadoTabela = "V";
+                    }
+                    else
+                    {
+                        resultadoTabela = "F";
+                    }
+                    
+                    linha.Add(resultadoTabela);
                     tabelaVerdade.Add(linha);
                 }
 
@@ -97,6 +136,7 @@ namespace calculadoraPreposicoes.Pages
                 cont = colunasTabela.Count;
                 tabelaVerdade.Reverse(); // Apenas inverte as linhas, mantendo a ordem das colunas correta
                 StateHasChanged();
+                calculandoTabela = false;
             }
         }
 

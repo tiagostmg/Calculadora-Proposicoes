@@ -2,17 +2,72 @@
 
 <PageTitle>Calculadora</PageTitle>
 
-<MudGrid Spacing="2" Class="mt-4">
-    <!-- Linha de botões (caracteres A, B, C, etc.) -->
-    <MudItem xs="12">
-        <MudGrid Spacing="1" Justify="Justify.Center">
-            @foreach (var caractere in new[] { "A", "B", "C", "D", "E", "(", ")", "~", "∧", "∨", "→", "↔", "⊻" })
+<style>
+    main{
+        font-family: "Inter", serif;
+    }
+    .btnCaractere {
+        border-radius: 5px;
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        font-weight: bolder;
+        font-family: "Inter ExtraBold", serif;
+        font-size: 14pt;
+        padding: 0;
+    }
+    .btn{
+        height: 50px;
+        font-weight: bolder;
+        font-family: "Inter", serif;
+        font-size: 13pt;
+    }
+    .textField{
+        font-family: Inter, serif;
+        max-width: 500px;
+        min-width: 500px;
+    }
+</style>
+
+<MudGrid Class="mt-4" Justify="Justify.Center">
+    <MudItem>
+        <MudGrid Spacing="1" Justify="Justify.FlexStart">
+            @foreach (var caractere in new[] { "A", "B", "C", "D", "E" })
             {
-                <MudItem xs="6" sm="1">
-                    <MudButton OnClick="() => adicionarCaractere(caractere)"
+                <MudItem>
+                    <MudButton Class="btnCaractere"
+                               OnClick="() => adicionarCaractere(caractere)"
                                Variant="Variant.Filled"
-                               Color="Color.Primary"
-                               FullWidth="true">
+                               Color="Color.Primary">
+                        @caractere
+                    </MudButton>
+                </MudItem>
+            }
+        </MudGrid>
+        
+        <MudGrid Spacing="1" Justify="Justify.FlexStart">
+            @foreach (var caractere in new[] { "∧", "∨", "→", "↔", "⊻" })
+            {
+                <MudItem>
+                    <MudButton Class="btnCaractere"
+                               OnClick="() => adicionarCaractere(caractere)"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary">
+                        @caractere
+                    </MudButton>
+                </MudItem>
+            }
+        </MudGrid>
+
+        <MudGrid Spacing="1" Justify="Justify.Center">
+            @foreach (var caractere in new[] { "(", ")", "~" })
+            {
+                <MudItem>
+                    <MudButton Class="btnCaractere"
+                               OnClick="() => adicionarCaractere(caractere)"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary">
                         @caractere
                     </MudButton>
                 </MudItem>
@@ -22,48 +77,56 @@
 
     <EditForm class="d-flex flex-column align-items-center w-100" EditContext="context" OnValidSubmit="calcularTabelaVerdade">
         <DataAnnotationsValidator></DataAnnotationsValidator>
-        <MudGrid Class="d-flex align-items-center w-100">
-            <MudItem xs="12" sm="11">
+        <MudGrid Class="d-flex align-items-center w-100" Justify="Justify.Center">
+            <MudItem Class="d-flex justify-center align-items-center">
+                <MudIconButton 
+                    Icon="@Icons.Material.TwoTone.Delete" 
+                    aria-label="delete" 
+                    OnClick="apagar" 
+                    Color="Color.Error"
+                    Disabled="@temCaractere"/>
+            </MudItem>
+            <MudItem Class="d-flex justify-center align-items-center">
                 <MudTextField @bind-Value="expressao.expressao"
                               For="(()=>expressao.expressao)"
                               Label="Expressão"
                               Variant="Variant.Outlined"
                               FullWidth="true"
                               ReadOnly="true"
-                              Class="mt-4" />
+                              Class="textField"/>
             </MudItem>
-            <MudItem xs="12" sm="1" Class="d-flex justify-center align-items-center">
-                <MudIconButton OnClick="apagarCaractere"
-                               Icon="@Icons.Material.Filled.Backspace"
-                               Variant="Variant.Filled"
-                               Color="Color.Warning"
-                               Size="Size.Large"
-                               Class="p-2" />
+            <MudItem Class="d-flex justify-center align-items-center">
+                <MudIconButton 
+                    Icon="@Icons.Material.TwoTone.Backspace" 
+                    aria-label="delete" 
+                    OnClick="apagarCaractere" 
+                    Color="Color.Error"
+                    Disabled="@temCaractere"/>
             </MudItem>
+            
         </MudGrid>
 
         <MudGrid Class="mt-4 w-100" Spacing="2" Justify="Justify.Center">
-            <MudItem xs="12" sm="2">
-                <MudButton OnClick="apagar"
-                           Variant="Variant.Filled"
-                           Color="Color.Error"
-                           FullWidth="true">
-                    Apagar Expressão
-                </MudButton>
-            </MudItem>
 
             <MudItem xs="12" sm="2">
-                <MudButton ButtonType="ButtonType.Submit"
+                <MudButton Class="btn"
+                           ButtonType="ButtonType.Submit"
                            Variant="Variant.Filled"
                            Color="Color.Primary"
-                           FullWidth="true">
-                    Calcular Expressão
+                           FullWidth="true"
+                           Disabled="@temCaractere">
+                    Calcular
                 </MudButton>
             </MudItem>
         </MudGrid>
 
     </EditForm>
 
+    
+    @if (calculandoTabela)
+    {
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+    }
 
     <!-- Exibição da tabela verdade -->
     @if (tabelaVerdade?.Count > 0)
@@ -80,5 +143,4 @@
         </MudTable>
 
     }
-
 </MudGrid>
