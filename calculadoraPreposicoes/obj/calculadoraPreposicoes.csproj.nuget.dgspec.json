@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rafael\\source\\repos\\rcacau\\Calculadora-Proposicoes\\calculadoraPreposicoes\\calculadoraPreposicoes.csproj": {}
+    "C:\\Users\\Tiago\\RiderProjects\\Calculadora-Proposicoes\\calculadoraPreposicoes\\calculadoraPreposicoes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rafael\\source\\repos\\rcacau\\Calculadora-Proposicoes\\calculadoraPreposicoes\\calculadoraPreposicoes.csproj": {
+    "C:\\Users\\Tiago\\RiderProjects\\Calculadora-Proposicoes\\calculadoraPreposicoes\\calculadoraPreposicoes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rafael\\source\\repos\\rcacau\\Calculadora-Proposicoes\\calculadoraPreposicoes\\calculadoraPreposicoes.csproj",
+        "projectUniqueName": "C:\\Users\\Tiago\\RiderProjects\\Calculadora-Proposicoes\\calculadoraPreposicoes\\calculadoraPreposicoes.csproj",
         "projectName": "calculadoraPreposicoes",
-        "projectPath": "C:\\Users\\Rafael\\source\\repos\\rcacau\\Calculadora-Proposicoes\\calculadoraPreposicoes\\calculadoraPreposicoes.csproj",
-        "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rafael\\source\\repos\\rcacau\\Calculadora-Proposicoes\\calculadoraPreposicoes\\obj\\",
+        "projectPath": "C:\\Users\\Tiago\\RiderProjects\\Calculadora-Proposicoes\\calculadoraPreposicoes\\calculadoraPreposicoes.csproj",
+        "packagesPath": "C:\\Users\\Tiago\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tiago\\RiderProjects\\Calculadora-Proposicoes\\calculadoraPreposicoes\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Tiago\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -27,7 +23,6 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://alexandrecavaleiro.pkgs.visualstudio.com/KCSCore/_packaging/KCSCore/nuget/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,8 +40,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -64,13 +58,13 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.14, )",
+              "version": "[8.0.8, )",
               "autoReferenced": true
             },
             "Microsoft.NET.Sdk.WebAssembly.Pack": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.3, )",
+              "version": "[8.0.8, )",
               "autoReferenced": true
             },
             "MudBlazor": {
@@ -96,7 +90,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-              "version": "[8.0.14, 8.0.14]"
+              "version": "[8.0.8, 8.0.8]"
             }
           ],
           "frameworkReferences": {
@@ -104,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

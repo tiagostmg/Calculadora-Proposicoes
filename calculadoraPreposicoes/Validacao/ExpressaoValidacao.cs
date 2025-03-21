@@ -18,7 +18,7 @@ namespace calculadoraPreposicoes.Validacao
         {
             'A', 'B', 'C', 'D', 'E'
         };
-
+        
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (value is not string expressao || string.IsNullOrWhiteSpace(expressao))
@@ -38,6 +38,12 @@ namespace calculadoraPreposicoes.Validacao
                 return new ValidationResult("A expressão possui parênteses desbalanceados.");
             }
 
+            // Verificar se a expressão começa com um operador
+            if (operadores.Contains(expressao[0]))
+            {
+                return new ValidationResult("A expressão não pode começar com um operador.");
+            }
+
             // Verificar se não há preposições juntas sem operador
             if (TemPreposicoesJuntas(expressao))
             {
@@ -52,6 +58,7 @@ namespace calculadoraPreposicoes.Validacao
 
             return ValidationResult.Success;
         }
+
 
         private static bool ParentesesBalanceados(string expressao)
         {

@@ -25,45 +25,48 @@ namespace calculadoraPreposicoes.Pages
             expressao = new Expressao();
             context = new EditContext(expressao);
             context.OnValidationRequested += (sender, e) => Console.WriteLine("Validação acionada!");
-            vazio();
+            DesabilitarBotoes();
         }
-        private void adicionarCaractere(string caractere)
+        
+        private void AdicionarCaractere(string caractere)
         {
             expressao.expressao += caractere;
-            vazio();
+            DesabilitarBotoes();
         }
 
-        private void apagarCaractere()
+        private void ApagarCaractere()
         {
             if (!string.IsNullOrEmpty(expressao.expressao) && expressao.expressao.Length > 0)
             {
                 expressao.expressao = expressao.expressao.Substring(0, expressao.expressao.Length - 1);
             }
-            vazio();
+            DesabilitarBotoes();
         }
 
-        private void apagar()
+        private void Limpar()
         {
             if (!string.IsNullOrEmpty(expressao.expressao) && expressao.expressao.Length > 0)
             {
                 expressao.expressao = "";
             }
-            vazio();
+            DesabilitarBotoes();
         }
 
-        private void vazio()
+        private Boolean ExpressaoEstaVazia()
         {
             if (!string.IsNullOrEmpty(expressao.expressao) && expressao.expressao.Length > 0)
             {
-                temCaractere = false;
+                return false;
             }
-            else
-            {
-                temCaractere = true;
-            }
+            return true;
         }
 
-        private async Task calcularTabelaVerdade()
+        private void DesabilitarBotoes()
+        {
+            temCaractere = ExpressaoEstaVazia();
+        }
+
+        private async Task CalcularTabelaVerdade()
         {
             if (tabelaVerdade is not null)
             {
@@ -139,10 +142,7 @@ namespace calculadoraPreposicoes.Pages
                 calculandoTabela = false;
             }
         }
-
-
-
-
+        
         private bool AvaliarExpressao(string expr, Dictionary<string, bool> valores)
         {
             // Substitui as proposições pelos valores
@@ -253,35 +253,49 @@ namespace calculadoraPreposicoes.Pages
 
         private string validar()
         {
+            
+            
             // Verificar caracteres inválidos
             if (expressao.expressao.Any(c => !caracteresPermitidos.Contains(c)))
             {
-                //return new ValidationResult("A expressão contém caracteres inválidos.");
                 return "A expressão contém caracteres inválidos.";
             }
 
             // Verificar se os parênteses estão balanceados
             if (!ParentesesBalanceados(expressao.expressao))
             {
-                //return new ValidationResult("A expressão possui parênteses desbalanceados.");
                 return "A expressão possui parênteses desbalanceados.";
+            }
+            
+            // Verificar se existem parênteses vazios "()"
+            if (expressao.expressao.Contains("()"))
+            {
+                return "A expressão não pode conter parênteses vazios.";
+            }
+
+            if (expressao.expressao[0] == '~' && expressao.expressao.Length == 1)
+            {
+                return "A expressão não pode começar com um operador.";
+            }
+            
+            // Verificar se a expressão começa com um operador
+            if (expressao.expressao.Length > 0 && operadores.Contains(expressao.expressao[0]) && expressao.expressao[0] != '~')
+            {
+                return "A expressão não pode começar com um operador.";
             }
 
             // Verificar se não há preposições juntas sem operador
             if (TemPreposicoesJuntas(expressao.expressao))
             {
-                //return new ValidationResult("A expressão contém preposições juntas sem operador.");
                 return "A expressão contém preposições juntas sem operador.";
             }
 
             // Verificar se não há operadores juntos sem preposição entre eles
             if (TemOperadoresJuntos(expressao.expressao))
             {
-                //return new ValidationResult("A expressão contém operadores juntos sem preposição entre eles.");
                 return "A expressão contém operadores juntos sem preposição entre eles.";
             }
 
-            //return ValidationResult.Success;
             return "ok";
         }
 
