@@ -12,7 +12,6 @@ namespace calculadoraPreposicoes.Pages
         private Expressao expressao;
         private List<string> colunasTabela = new();
         private List<List<string>> tabelaVerdade;
-        private int cont;
         private bool calculandoTabela = false;
         private bool temCaractere = true;
         
@@ -136,7 +135,6 @@ namespace calculadoraPreposicoes.Pages
 
                 tabelaVerdade.Add(colunasTabela);
 
-                cont = colunasTabela.Count;
                 tabelaVerdade.Reverse(); // Apenas inverte as linhas, mantendo a ordem das colunas correta
                 StateHasChanged();
                 calculandoTabela = false;
@@ -251,53 +249,82 @@ namespace calculadoraPreposicoes.Pages
             'A', 'B', 'C', 'D', 'E'
         };
 
-        private string validar()
+private string validar()
+{
+    // Verificar caracteres inválidos
+    if (expressao.expressao.Any(c => !caracteresPermitidos.Contains(c)))
+    {
+        return "A expressão contém caracteres inválidos.";
+    }
+
+    // Verificar se os parênteses estão balanceados
+    if (!ParentesesBalanceados(expressao.expressao))
+    {
+        return "A expressão possui parênteses desbalanceados.";
+    }
+
+    // Verificar se a expressão é apenas "~"
+    if (expressao.expressao.Length == 1 && expressao.expressao[0] == '~')
+    {
+        return "A expressão não pode ser apenas um operador '~'.";
+    }
+
+    // Verificar se a expressão começa com um operador inválido (exceto '~')
+    if (operadores.Contains(expressao.expressao[0]) && expressao.expressao[0] != '~')
+    {
+        return "A expressão não pode começar com um operador lógico.";
+    }
+
+    // Verificar se a expressão termina com um operador (exceto ')')
+    if (operadores.Contains(expressao.expressao[^1]) && expressao.expressao[^1] != ')')
+    {
+        return "A expressão não pode terminar com um operador.";
+    }
+
+    // Verificar se existem parênteses vazios "()"
+    if (expressao.expressao.Contains("()"))
+    {
+        return "A expressão não pode conter parênteses vazios.";
+    }
+
+    // Verificar se '~' tem um operando válido depois
+    for (int i = 0; i < expressao.expressao.Length - 1; i++)
+    {
+        if (expressao.expressao[i] == '~' && 
+            !preposicoes.Contains(expressao.expressao[i + 1]) && 
+            expressao.expressao[i + 1] != '(')
         {
-            
-            
-            // Verificar caracteres inválidos
-            if (expressao.expressao.Any(c => !caracteresPermitidos.Contains(c)))
-            {
-                return "A expressão contém caracteres inválidos.";
-            }
-
-            // Verificar se os parênteses estão balanceados
-            if (!ParentesesBalanceados(expressao.expressao))
-            {
-                return "A expressão possui parênteses desbalanceados.";
-            }
-            
-            // Verificar se existem parênteses vazios "()"
-            if (expressao.expressao.Contains("()"))
-            {
-                return "A expressão não pode conter parênteses vazios.";
-            }
-
-            if (expressao.expressao[0] == '~' && expressao.expressao.Length == 1)
-            {
-                return "A expressão não pode começar com um operador.";
-            }
-            
-            // Verificar se a expressão começa com um operador
-            if (expressao.expressao.Length > 0 && operadores.Contains(expressao.expressao[0]) && expressao.expressao[0] != '~')
-            {
-                return "A expressão não pode começar com um operador.";
-            }
-
-            // Verificar se não há preposições juntas sem operador
-            if (TemPreposicoesJuntas(expressao.expressao))
-            {
-                return "A expressão contém preposições juntas sem operador.";
-            }
-
-            // Verificar se não há operadores juntos sem preposição entre eles
-            if (TemOperadoresJuntos(expressao.expressao))
-            {
-                return "A expressão contém operadores juntos sem preposição entre eles.";
-            }
-
-            return "ok";
+            return "O operador '~' deve ser seguido por uma preposição ou um parêntese.";
         }
+    }
+
+    if (TemPreposicoesJuntas(expressao.expressao))
+    {
+       return "Não pode duas preposicoes juntas."; 
+    }
+
+    if (TemOperadoresJuntos(expressao.expressao))
+    {
+        return "Não pode dois operadores juntos.";
+    }
+
+    for (int i = 0; i < expressao.expressao.Length - 1; i++)
+    {
+        if (expressao.expressao[i] == '(' && operadores.Contains(expressao.expressao[i + 1]) && expressao.expressao[i + 1] != '~')
+        {
+            return "Não pode ter um operador depois de um parêntese";
+        }
+
+        if (preposicoes.Contains(expressao.expressao[i]) && expressao.expressao[i + 1] != '(')
+        {
+            return "Não pode conter uma preposição antes de '(' sem operador";
+        }
+    }
+    
+    
+    return "ok";
+}
+
 
         private static bool ParentesesBalanceados(string expressao)
         {
