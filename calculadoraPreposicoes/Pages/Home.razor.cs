@@ -319,6 +319,11 @@ private string validar()
         {
             return "Não pode conter uma preposição antes de '(' sem operador";
         }
+
+        if (preposicoes.Contains(expressao.expressao[i]) && expressao.expressao[i + 1] == '~')
+        {
+            return "'~' não pode estar depois de uma preposição";
+        }
     }
     
     
