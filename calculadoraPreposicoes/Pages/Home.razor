@@ -131,16 +131,19 @@
     <!-- Exibição da tabela verdade -->
     @if (tabelaVerdade?.Count > 0)
     {
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <MudTable Items="tabelaVerdade" Class="mt-4">
+                <RowTemplate>
+                    @foreach (var valor in context)
+                    {
+                        <MudTd>@valor</MudTd>
+                    }
+                </RowTemplate>
+            </MudTable>
 
-        <MudTable Items="tabelaVerdade" Class="mt-4">
+            <br>
 
-            <RowTemplate>
-                @foreach (var valor in context)
-                {
-                    <MudTd>@valor</MudTd>
-                }
-            </RowTemplate>
-        </MudTable>
-
+            <p style="margin-top: 10px;">@retornoClassificacao</p>
+        </div>
     }
 </MudGrid>

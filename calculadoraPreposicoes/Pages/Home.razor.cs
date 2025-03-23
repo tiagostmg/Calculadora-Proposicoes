@@ -12,8 +12,11 @@ namespace calculadoraPreposicoes.Pages
         private Expressao expressao;
         private List<string> colunasTabela = new();
         private List<List<string>> tabelaVerdade;
+        private List<string> colunaResultados = new();
         private bool calculandoTabela = false;
         private bool temCaractere = true;
+        private string retornoClassificacao;
+        private int apagardepois;
         
         [Inject]
         public ISnackbar SnackBar { get; set; } = default!;
@@ -71,6 +74,11 @@ namespace calculadoraPreposicoes.Pages
             {
                 tabelaVerdade.Clear();
             }
+
+            if (colunaResultados?.Count > 0)
+            {
+                colunaResultados.Clear();
+            }
             
             calculandoTabela = true;
             
@@ -102,8 +110,7 @@ namespace calculadoraPreposicoes.Pages
                 // Gera todas as combinações de valores verdade
                 int linhas = (int)Math.Pow(2, proposicoes.Count);
                 tabelaVerdade = new List<List<string>>();
-
-
+                
                 for (int i = 0; i < linhas; i++)
                 {
                     var valores = new Dictionary<string, bool>();
@@ -131,14 +138,39 @@ namespace calculadoraPreposicoes.Pages
                     
                     linha.Add(resultadoTabela);
                     tabelaVerdade.Add(linha);
+                    colunaResultados.Add(resultadoTabela);
                 }
 
                 tabelaVerdade.Add(colunasTabela);
 
                 tabelaVerdade.Reverse(); // Apenas inverte as linhas, mantendo a ordem das colunas correta
                 StateHasChanged();
+                retornoClassificacao = ValidarClassificacaoTabela();
                 calculandoTabela = false;
             }
+        }
+
+        private string ValidarClassificacaoTabela()
+        {
+            int countV = 0;
+            foreach (var valor in colunaResultados)
+            {
+                if (valor == "V")
+                {
+                    countV++;
+                }
+            }
+            apagardepois = countV;
+
+            if (countV == colunaResultados.Count)
+            {
+                return "TAUTOLOGIA";
+            }
+            if (countV < colunaResultados.Count && countV > 0)
+            {
+                return "CONTINGÊNCIA";
+            }
+            return "CONTRADIÇÃO";
         }
         
         private bool AvaliarExpressao(string expr, Dictionary<string, bool> valores)
