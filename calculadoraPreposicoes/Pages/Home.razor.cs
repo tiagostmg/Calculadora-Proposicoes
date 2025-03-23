@@ -315,7 +315,7 @@ private string validar()
             return "Não pode ter um operador depois de um parêntese";
         }
 
-        if (preposicoes.Contains(expressao.expressao[i]) && expressao.expressao[i + 1] != '(')
+        if (preposicoes.Contains(expressao.expressao[i]) && expressao.expressao[i + 1] == '(')
         {
             return "Não pode conter uma preposição antes de '(' sem operador";
         }
